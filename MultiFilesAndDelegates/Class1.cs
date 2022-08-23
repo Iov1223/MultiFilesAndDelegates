@@ -1,61 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace MultiFilesAndDelegates
 {
-    class myClass
+    class Class1
     {
-        static private string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        static public string[] FindeNum()
+        static public string Plus(string num1, string num2)
         {
-            string[] arrReadText = myClass.ReadTaskFile("Task.txt").Split('\n');
-            //int[] aAndb = new int[arrReadText.Length];
-            // int aAndb = 0;
-            Regex regex1 = new Regex(@"(\d+)", RegexOptions.IgnoreCase);
-            Regex regex2 = new Regex(@"[*+/-]", RegexOptions.IgnoreCase);
-            int a = 0, b = 0, result = 0;
-            for (int i = 0; i < arrReadText.Length; i++)
+            int n1 = Convert.ToInt32(num1);
+            int n2 = Convert.ToInt32(num2);
+            int res = n1 + n2;
+            string result = Convert.ToString(res);
+            return result;
+        }
+        static public string Minus(string num1, string num2)
+        {
+            int n1 = Convert.ToInt32(num1);
+            int n2 = Convert.ToInt32(num2);
+            int res = n1 - n2;
+            string result = Convert.ToString(res);
+            return result;
+        }
+        static public string Multiply(string num1, string num2)
+        {
+            int n1 = Convert.ToInt32(num1);
+            int n2 = Convert.ToInt32(num2);
+            int res = n1 * n2;
+            string result = Convert.ToString(res);
+            return result;
+        }
+        static public string Divide(string num1, string num2)
+        {
+            string result = "";
+            double n1 = Convert.ToDouble(num1);
+            double n2 = Convert.ToDouble(num2);
+            double res = 0;
+            if (n2 == 0)
             {
-                MatchCollection matches1 = regex1.Matches(arrReadText[i]);
-                a = Convert.ToInt32(Convert.ToString(matches1[0]));
-                b = Convert.ToInt32(Convert.ToString(matches1[1]));
-
-                for (int j = 0; j < arrReadText[i].Length; j++)
-                {
-                    MatchCollection matches2 = regex2.Matches(arrReadText[j]);
-                    if (Convert.ToString(matches2) == "*")
-                        result = a * b;
-                    else
-                        if (Convert.ToString(matches2) == "/")
-                        result = a / b;
-                    else
-                            if (Convert.ToString(matches2) == "+")
-                        result = a + b;
-                    else
-                                if (Convert.ToString(matches2) == "-")
-                        result = a - b;
-                }
-                    Convert.ToString(result);
-                    arrReadText[i] += " " + result + "\n";
-                
+                result = "На нодь делить нельзя";
             }
-            return arrReadText;
-        }
-        public static string ReadTaskFile(string fileName)
-        {
-            fileName = path + "\\" + fileName;
-            string readText = File.ReadAllText(fileName);           
-            return readText;
-        }
-        static public void WriteTaskFile(string fileName, string text)
-        {
-            fileName = path + "\\" + fileName;
-            File.WriteAllText(fileName, text);
-        }
+            else
+            {
+                res = n1 / n2;
+                result = Convert.ToString(res);
+            }
+            return result;
+        }       
     }
 }
